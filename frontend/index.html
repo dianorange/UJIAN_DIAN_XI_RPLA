@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistem Peminjaman Alat Praktik</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    section { scroll-margin-top: 4.5rem; }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+  <header class="fixed top-0 inset-x-0 z-40 bg-indigo-700 text-white shadow">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <h1 class="text-lg sm:text-xl font-bold">Sistem Peminjaman Alat Praktik</h1>
+      <nav class="flex gap-2 sm:gap-3 text-sm sm:text-base">
+        <a href="#alat" class="px-3 py-1.5 rounded-lg hover:bg-indigo-600 transition">Alat</a>
+        <a href="#kategori" class="px-3 py-1.5 rounded-lg hover:bg-indigo-600 transition">Kategori</a>
+        <a href="#peminjaman" class="px-3 py-1.5 rounded-lg hover:bg-indigo-600 transition">Peminjaman</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 pt-24 pb-16 space-y-20">
+    <section id="alat" class="min-h-[70vh]">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold">Data Alat</h2>
+        <button id="btnTambahAlat" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium">
+          + Tambah Alat
+        </button>
+      </div>
+      <div class="bg-white rounded-xl shadow overflow-x-auto">
+        <table class="w-full text-sm text-left">
+          <thead class="bg-slate-50 text-slate-600 uppercase text-xs">
+            <tr>
+              <th class="px-4 py-3">id_alat</th>
+              <th class="px-4 py-3">id_kategori</th>
+              <th class="px-4 py-3">Nama Alat</th>
+              <th class="px-4 py-3">Kondisi</th>
+              <th class="px-4 py-3">Stok</th>
+              <th class="px-4 py-3">Lokasi</th>
+              <th class="px-4 py-3">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tabelAlat" class="divide-y"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="kategori" class="min-h-[70vh]">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold">Data Kategori</h2>
+        <button id="btnTambahKategori" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium">
+          + Tambah Kategori
+        </button>
+      </div>
+      <div class="bg-white rounded-xl shadow overflow-x-auto">
+        <table class="w-full text-sm text-left">
+          <thead class="bg-slate-50 text-slate-600 uppercase text-xs">
+            <tr>
+              <th class="px-4 py-3">id_kategori</th>
+              <th class="px-4 py-3">nama_kategori</th>
+              <th class="px-4 py-3">Deskripsi</th>
+              <th class="px-4 py-3">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tabelKategori" class="divide-y"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="peminjaman" class="min-h-[70vh] space-y-8">
+      <div>
+        <h2 class="text-2xl font-bold mb-4">Form Peminjaman</h2>
+        <form id="formPeminjaman" class="bg-white rounded-xl shadow p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-1">Nama Peminjam</label>
+            <input id="pNama" required class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Pilih Alat</label>
+            <select id="pAlat" required class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"></select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Kelas</label>
+            <input id="pKelas" required class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Jumlah</label>
+            <input id="pJumlah" type="number" min="1" required class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+          </div>
+          <div class="md:col-span-2">
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg font-medium">
+              Pinjam
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold mb-4">Riwayat Peminjaman</h2>
+        <div class="bg-white rounded-xl shadow overflow-x-auto">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-slate-50 text-slate-600 uppercase text-xs">
+              <tr>
+                <th class="px-4 py-3">id_peminjaman</th>
+                <th class="px-4 py-3">id_alat</th>
+                <th class="px-4 py-3">Nama Peminjam</th>
+                <th class="px-4 py-3">Kelas</th>
+                <th class="px-4 py-3">Tgl Pinjam</th>
+                <th class="px-4 py-3">Tgl Kembali</th>
+                <th class="px-4 py-3">Jumlah</th>
+                <th class="px-4 py-3">Status</th>
+                <th class="px-4 py-3">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tabelPeminjaman" class="divide-y"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="modalAlat" class="hidden fixed inset-0 z-50 bg-black/50 items-center justify-center p-4">
+    <form id="formAlat" class="bg-white rounded-xl shadow-xl w-full max-w-md p-6 space-y-3">
+      <h3 id="judulModalAlat" class="text-xl font-bold">Tambah Alat</h3>
+      <input type="hidden" id="aId" />
+      <div>
+        <label class="block text-sm font-medium mb-1">Kategori</label>
+        <select id="aKategori" required class="w-full border rounded-lg px-3 py-2"></select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Nama Alat</label>
+        <input id="aNama" required class="w-full border rounded-lg px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Kondisi</label>
+        <input id="aKondisi" value="Baik" class="w-full border rounded-lg px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Stok</label>
+        <input id="aStok" type="number" min="0" required class="w-full border rounded-lg px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Lokasi</label>
+        <input id="aLokasi" class="w-full border rounded-lg px-3 py-2" />
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" data-close="modalAlat" class="px-4 py-2 rounded-lg bg-slate-200 hover:bg-slate-300">Batal</button>
+        <button type="submit" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white">Simpan</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="modalKategori" class="hidden fixed inset-0 z-50 bg-black/50 items-center justify-center p-4">
+    <form id="formKategori" class="bg-white rounded-xl shadow-xl w-full max-w-md p-6 space-y-3">
+      <h3 id="judulModalKategori" class="text-xl font-bold">Tambah Kategori</h3>
+      <input type="hidden" id="kId" />
+      <div>
+        <label class="block text-sm font-medium mb-1">Nama Kategori</label>
+        <input id="kNama" required class="w-full border rounded-lg px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Deskripsi</label>
+        <textarea id="kDeskripsi" rows="3" class="w-full border rounded-lg px-3 py-2"></textarea>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" data-close="modalKategori" class="px-4 py-2 rounded-lg bg-slate-200 hover:bg-slate-300">Batal</button>
+        <button type="submit" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white">Simpan</button>
+      </div>
+    </form>
+  </div>
+  
+  <div id="toast" class="hidden fixed bottom-6 right-6 z-[60] px-4 py-3 rounded-lg shadow-lg text-white"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
